@@ -1,0 +1,28 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, Admin!</h1>
+    <h2>Manage Users</h2>
+    <a href="{{ url_for('manage_users') }}">View Users</a>
+    <h2>Manage Books</h2>
+    <a href="{{ url_for('add_book') }}">Add Book</a>
+    <ul>
+        {% for book in books %}
+            <li>
+                {{ book.title }} by {{ book.author }}
+                <form action="{{ url_for('delete_book', book_id=book.id) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="{{ url_for('update_book', book_id=book.id) }}">Update</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
